@@ -75,17 +75,136 @@ class GitHubAPI:
             page += 1
 
     # ---------------------------------------------------------
+    # Statistics
+    # ---------------------------------------------------------
+
+    def fetch_stats(self) -> dict:
+        """Fetch GitHub profile statistics."""
+
+        try:
+            return self._fetch_stats_graphql()
+        except Exception as e:
+            logger.warning(
+                "GraphQL stats failed, falling back to REST: %s",
+                e,
+            )
+            return self._fetch_stats_rest()
+
+    def _fetch_stats_graphql(self) -> dict:
+        """Fetch statistics using GitHub GraphQL API."""
+
+        if not self.token:
+            return self._fetch_stats_rest()
+
+        query = """
+        query($login: String!) {
+          user(login: $login) {
+            repositories(
+              first: 100
+              ownerAffiliations: OWNER
+              privacy: PUBLIC
+            ) {
+              totalCount
+              nodes {
+                stargazerCount
+                forkCount
+              }
+            }
+
+            contributionsCollection {
+              totalCommitContributions
+              totalPullRequestContributions
+              totalIssueContributions
+            }
+          }
+        }
+        """
+
+        response = self._request(
+            "POST",
+            "https://api.github.com/graphql",
+            json={
+                "query": query,
+                "variables": {
+                    "login": self.username
+                },
+            },
+        )
+
+        response.raise_for_status()
+
+        data = response.json()
+
+        if "errors" in data:
+            raise RuntimeError(data["errors"])
+
+        user = data["data"]["user"]
+
+        if user is None:
+            raise RuntimeError("GitHub user not found")
+
+        repositories = user["repositories"]
+
+        total_stars = sum(
+            repo["stargazerCount"]
+            for repo in repositories["nodes"]
+        )
+
+        total_forks = sum(
+            repo["forkCount"]
+            for repo in repositories["nodes"]
+        )
+
+        contributions = user["contributionsCollection"]
+
+        return {
+            "commits": contributions["totalCommitContributions"],
+            "prs": contributions["totalPullRequestContributions"],
+            "issues": contributions["totalIssueContributions"],
+            "repos": repositories["totalCount"],
+            "stars": total_stars,
+            "forks": total_forks,
+        }
+
+    def _fetch_stats_rest(self) -> dict:
+        """Fetch statistics using GitHub REST API."""
+
+        repositories = self.fetch_repositories()
+
+        repositories = [
+            repo
+            for repo in repositories
+            if not repo.get("fork")
+        ]
+
+        stars = sum(
+            repo.get("stargazers_count", 0)
+            for repo in repositories
+        )
+
+        forks = sum(
+            repo.get("forks_count", 0)
+            for repo in repositories
+        )
+
+        return {
+            "commits": 0,
+            "prs": 0,
+            "issues": 0,
+            "repos": len(repositories),
+            "stars": stars,
+            "forks": forks,
+        }
+
+    # ---------------------------------------------------------
     # Languages
     # ---------------------------------------------------------
 
     def fetch_languages(self) -> dict:
         """
-        Fetch language byte counts aggregated across all
-        repositories owned by the authenticated user.
-
-        This uses /user/repos instead of /users/{username}/repos
-        so private repositories can also be included when the
-        GitHub token has the required permissions.
+        Fetch language byte counts across all owned non-fork
+        repositories, including private repositories when the
+        GitHub token has sufficient permissions.
         """
 
         languages = {}
@@ -127,11 +246,11 @@ class GitHubAPI:
 
                         repo_languages = lang_resp.json()
 
-                        for lang, bytes_count in repo_languages.items():
+                        for language, byte_count in repo_languages.items():
 
-                            languages[lang] = (
-                                languages.get(lang, 0)
-                                + bytes_count
+                            languages[language] = (
+                                languages.get(language, 0)
+                                + byte_count
                             )
 
                     else:
@@ -142,12 +261,12 @@ class GitHubAPI:
                             lang_resp.status_code,
                         )
 
-                except requests.exceptions.RequestException as e:
+                except requests.exceptions.RequestException as error:
 
                     logger.warning(
                         "Error fetching languages for %s: %s",
                         repo.get("full_name", "unknown"),
-                        e,
+                        error,
                     )
 
             if len(repos) < 100:
