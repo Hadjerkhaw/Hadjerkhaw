@@ -5,14 +5,18 @@
 <br/>
 
 <div align="center">
-  <img src="./assets/generated/tech-stack.svg" width="850" alt="Tech Stack"/>
+  <img src="https://raw.githubusercontent.com/Hadjerkhaw/Hadjerkhaw/output/github-snake.svg"
+       width="850"
+       alt="GitHub Contribution Snake"/>
 </div>
 
 <br/>
 
+<div align="center">
+  <img src="./assets/generated/tech-stack.svg" width="850" alt="Focus Sectors"/>
+</div>
 
-
-
+<br/>
 
 <details>
 <summary><strong>More about me</strong></summary>
