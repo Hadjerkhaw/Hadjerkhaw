@@ -14,9 +14,7 @@
   <rect x="0.5" y="0.5" width="849" height="239" rx="12" ry="12"
         fill="#0f1623" stroke="#1a2332" stroke-width="1"/>
 
-  <!-- ========================= -->
-  <!-- LEFT: CURRENTLY BUILDING -->
-  <!-- ========================= -->
+  <!-- ================= LEFT : CURRENTLY BUILDING ================= -->
 
   <text x="45" y="38"
         fill="#64748b"
@@ -26,92 +24,102 @@
     CURRENTLY BUILDING
   </text>
 
-  <!-- Vertical timeline -->
-  <line x1="58" y1="65" x2="58" y2="205"
-        stroke="#1a2332"
-        stroke-width="1"/>
+  <!-- Vertical accent -->
+  <line x1="45" y1="58" x2="45" y2="198"
+        stroke="#00d4ff"
+        stroke-width="1"
+        opacity="0.35"/>
 
-  <!-- Item 1 -->
-  <circle cx="58" cy="76" r="5"
+  <!-- Data Science -->
+  <circle cx="45" cy="75" r="4"
           fill="#a78bfa"
-          opacity="0.9"
-          filter="url(#glow)"/>
+          filter="url(#glow)">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="2s"
+             repeatCount="indefinite"/>
+  </circle>
 
-  <text x="78" y="72"
-        fill="#f1f5f9"
-        font-size="12"
+  <text x="62" y="72"
+        fill="#a78bfa"
+        font-size="11"
         font-family="monospace">
-    Data Science
+    DATA SCIENCE
   </text>
 
-  <text x="78" y="89"
-        fill="#64748b"
+  <text x="62" y="88"
+        fill="#94a3b8"
         font-size="9"
         font-family="monospace">
     Exploring data → insights
   </text>
 
-  <!-- Item 2 -->
-  <circle cx="58" cy="125" r="5"
+  <!-- Machine Learning -->
+  <circle cx="45" cy="120" r="4"
           fill="#00d4ff"
-          opacity="0.9"
-          filter="url(#glow)"/>
+          filter="url(#glow)">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="2.5s"
+             repeatCount="indefinite"/>
+  </circle>
 
-  <text x="78" y="121"
-        fill="#f1f5f9"
-        font-size="12"
+  <text x="62" y="117"
+        fill="#00d4ff"
+        font-size="11"
         font-family="monospace">
-    Machine Learning
+    MACHINE LEARNING
   </text>
 
-  <text x="78" y="138"
-        fill="#64748b"
+  <text x="62" y="133"
+        fill="#94a3b8"
         font-size="9"
         font-family="monospace">
     Training → evaluating models
   </text>
 
-  <!-- Item 3 -->
-  <circle cx="58" cy="174" r="5"
+  <!-- AI Projects -->
+  <circle cx="45" cy="165" r="4"
           fill="#ffb020"
-          opacity="0.9"
-          filter="url(#glow)"/>
+          filter="url(#glow)">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="3s"
+             repeatCount="indefinite"/>
+  </circle>
 
-  <text x="78" y="170"
-        fill="#f1f5f9"
-        font-size="12"
+  <text x="62" y="162"
+        fill="#ffb020"
+        font-size="11"
         font-family="monospace">
-    AI Projects
+    AI PROJECTS
   </text>
 
-  <text x="78" y="187"
-        fill="#64748b"
+  <text x="62" y="178"
+        fill="#94a3b8"
         font-size="9"
         font-family="monospace">
     Learning by building
   </text>
 
   <!-- Small status -->
-  <circle cx="78" cy="213" r="2.5"
-          fill="#00d4ff">
-    <animate attributeName="opacity"
-             values="0.3;1;0.3"
-             dur="2s"
-             repeatCount="indefinite"/>
-  </circle>
-
-  <text x="88" y="216"
+  <text x="45" y="215"
         fill="#64748b"
         font-size="8"
         font-family="monospace"
         letter-spacing="1">
-    IN PROGRESS
+    STATUS: LEARNING • BUILDING • EXPLORING
   </text>
 
 
-  <!-- ========================= -->
-  <!-- RIGHT: FOCUS SECTORS -->
-  <!-- ========================= -->
+  <!-- ================= DIVIDER ================= -->
+
+  <line x1="425" y1="25" x2="425" y2="215"
+        stroke="#1a2332"
+        stroke-width="1"/>
+
+
+  <!-- ================= RIGHT : FOCUS SECTORS ================= -->
 
   <text x="460" y="38"
         fill="#64748b"
@@ -143,7 +151,7 @@
           stroke-dasharray="3,3"
           opacity="0.25"/>
 
-  <!-- Sector wedges -->
+  <!-- Sectors -->
   <path d="M 637 140
            L 638.1 75.0
            A 65 65 0 0 1 693.9 171.5 Z"
@@ -171,9 +179,9 @@
         stroke-opacity="0.3"
         stroke-width="0.5"/>
 
-  <!-- Radar axes -->
+  <!-- Radar lines -->
   <line x1="637" y1="140"
-        x2="637.0" y2="75.0"
+        x2="637" y2="75"
         stroke="#64748b"
         stroke-width="0.5"
         opacity="0.3"/>
@@ -191,7 +199,7 @@
         opacity="0.3"/>
 
 
-  <!-- Animated sweep -->
+  <!-- Rotating scanner -->
   <g>
 
     <path d="M 637 140
@@ -208,13 +216,16 @@
              fill="#00d4ff"
              opacity="0.5"/>
 
-    <circle cx="637" cy="75" r="2"
+    <circle cx="637" cy="75"
+            r="2"
             fill="#00d4ff"
             opacity="0.6">
+
       <animate attributeName="opacity"
                values="0.4;0.8;0.4"
                dur="2s"
                repeatCount="indefinite"/>
+
     </circle>
 
     <animateTransform
@@ -228,7 +239,7 @@
   </g>
 
 
-  <!-- Sector labels -->
+  <!-- Focus labels -->
 
   <text x="708.9" y="98.5"
         fill="#a78bfa"
@@ -245,11 +256,11 @@
         font-family="monospace"
         text-anchor="start"
         dominant-baseline="middle">
-    Python · Pandas
+    Python • Pandas • NumPy
   </text>
 
 
-  <text x="637.0" y="223.0"
+  <text x="637" y="223"
         fill="#00d4ff"
         font-size="9"
         font-family="monospace"
@@ -258,13 +269,13 @@
     Machine Learning
   </text>
 
-  <text x="637.0" y="235.0"
+  <text x="637" y="235"
         fill="#64748b"
         font-size="8"
         font-family="monospace"
         text-anchor="middle"
         dominant-baseline="middle">
-    Scikit-learn
+    Scikit-learn • Model Evaluation
   </text>
 
 
@@ -283,142 +294,98 @@
         font-family="monospace"
         text-anchor="end"
         dominant-baseline="middle">
-    C · Java · Git
+    C • Java • OOP • Git
   </text>
 
 
-  <!-- Animated particles -->
+  <!-- Animated nodes -->
 
-  <circle cx="641.6" cy="116.4" r="3"
+  <circle cx="641.6" cy="116.4"
+          r="3"
           fill="#a78bfa"
           opacity="0.35">
     <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
+             values="0.35;0.35;1;0.35;0.35"
              keyTimes="0;0.04;0.06;0.10;1"
              dur="8s"
              begin="7.94s"
              repeatCount="indefinite"/>
   </circle>
 
-  <circle cx="664.6" cy="111.1" r="3"
+  <circle cx="664.6" cy="111.1"
+          r="3"
           fill="#a78bfa"
           opacity="0.35">
     <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
+             values="0.35;0.35;1;0.35;0.35"
              keyTimes="0;0.04;0.06;0.10;1"
              dur="8s"
              begin="0.67s"
              repeatCount="indefinite"/>
   </circle>
 
-  <circle cx="691.4" cy="126.8" r="3"
+  <circle cx="691.4" cy="126.8"
+          r="3"
           fill="#a78bfa"
           opacity="0.35">
     <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
+             values="0.35;0.35;1;0.35;0.35"
              keyTimes="0;0.04;0.06;0.10;1"
              dur="8s"
              begin="1.40s"
              repeatCount="indefinite"/>
   </circle>
 
-  <circle cx="659.7" cy="147.8" r="3"
+  <circle cx="659.7" cy="147.8"
+          r="3"
           fill="#a78bfa"
           opacity="0.35">
     <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
+             values="0.35;0.35;1;0.35;0.35"
              keyTimes="0;0.04;0.06;0.10;1"
              dur="8s"
              begin="2.12s"
              repeatCount="indefinite"/>
   </circle>
 
-  <circle cx="655.1" cy="155.7" r="3"
+  <circle cx="655.1" cy="155.7"
+          r="3"
           fill="#00d4ff"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="2.61s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="648.2" cy="178.4" r="3"
+  <circle cx="648.2" cy="178.4"
+          r="3"
           fill="#00d4ff"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="3.34s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="621.3" cy="193.7" r="3"
+  <circle cx="621.3" cy="193.7"
+          r="3"
           fill="#00d4ff"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="4.06s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="618.9" cy="155.7" r="3"
+  <circle cx="618.9" cy="155.7"
+          r="3"
           fill="#00d4ff"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="4.79s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="614.3" cy="147.8" r="3"
+  <circle cx="614.3" cy="147.8"
+          r="3"
           fill="#ffb020"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="5.28s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="598.1" cy="130.5" r="3"
+  <circle cx="598.1" cy="130.5"
+          r="3"
           fill="#ffb020"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="6.00s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="598.3" cy="99.5" r="3"
+  <circle cx="598.3" cy="99.5"
+          r="3"
           fill="#ffb020"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="6.73s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
-  <circle cx="632.4" cy="116.4" r="3"
+  <circle cx="632.4" cy="116.4"
+          r="3"
           fill="#ffb020"
-          opacity="0.35">
-    <animate attributeName="opacity"
-             values="0.35;0.35;1.0;0.35;0.35"
-             keyTimes="0;0.04;0.06;0.10;1"
-             dur="8s"
-             begin="7.46s"
-             repeatCount="indefinite"/>
-  </circle>
+          opacity="0.35"/>
 
 </svg>
