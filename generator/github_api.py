@@ -201,14 +201,8 @@ class GitHubAPI:
     # ---------------------------------------------------------
 
     def fetch_languages(self) -> dict:
-        """
-        Fetch language byte counts across all owned non-fork
-        repositories, including private repositories when the
-        GitHub token has sufficient permissions.
-        """
-
+        """Fetch language byte counts across all owned non-fork repositories."""
         languages = {}
-
         page = 1
 
         while True:
@@ -222,17 +216,13 @@ class GitHubAPI:
                     "affiliation": "owner",
                 },
             )
-
             repos_resp.raise_for_status()
-
             repos = repos_resp.json()
 
             if not repos:
                 break
 
             for repo in repos:
-
-                # Ignore forked repositories
                 if repo.get("fork"):
                     continue
 
@@ -243,30 +233,20 @@ class GitHubAPI:
                     )
 
                     if lang_resp.status_code == 200:
-
-                        repo_languages = lang_resp.json()
-
-                        for language, byte_count in repo_languages.items():
-
-                            languages[language] = (
-                                languages.get(language, 0)
-                                + byte_count
-                            )
-
+                        for lang, bytes_count in lang_resp.json().items():
+                            languages[lang] = languages.get(lang, 0) + bytes_count
                     else:
                         logger.warning(
-                            "Could not fetch languages for %s "
-                            "(HTTP %d)",
+                            "Could not fetch languages for %s (HTTP %d)",
                             repo.get("full_name", "unknown"),
                             lang_resp.status_code,
                         )
 
-                except requests.exceptions.RequestException as error:
-
+                except requests.exceptions.RequestException as e:
                     logger.warning(
                         "Error fetching languages for %s: %s",
                         repo.get("full_name", "unknown"),
-                        error,
+                        e,
                     )
 
             if len(repos) < 100:
@@ -275,10 +255,6 @@ class GitHubAPI:
             page += 1
 
         return languages
-
-    # ---------------------------------------------------------
-    # User information
-    # ---------------------------------------------------------
 
     def fetch_user(self) -> dict:
         """Fetch GitHub user information."""
